@@ -2,12 +2,11 @@
 
 import path from 'path'
 import webpack from 'webpack'
-import makeConfig from './webpack.config'
+import config from './webpack.config'
 import browserSync from 'browser-sync'
 import devMiddleware from 'webpack-dev-middleware'
 import hotMiddleware from 'webpack-hot-middleware'
 
-const config = makeConfig()
 const bundler = webpack(config)
 const server = browserSync.create('dev')
 const baseDir = 'src'
