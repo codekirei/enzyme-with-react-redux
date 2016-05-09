@@ -25,5 +25,5 @@ const output = shallow(<Root />)
 // )
 
 exports['<Root />'] = {
-  'is a <div>': () => expect(output).to.have.tagName('div'),
+  'is a <div>': () => expect(output.type()).to.equal('div'),
 }
