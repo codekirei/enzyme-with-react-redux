@@ -5,16 +5,25 @@ import chaiEnzyme from 'chai-enzyme'
 chai.use(chaiEnzyme())
 
 import Root from '../../src/components/root.jsx'
-import makeStore from '../../src/store'
 
-const store = makeStore()
-let output
+// this fails with:
+//   Invariant Violation: Could not find "store" in either the context or props of
+//   "Connect(Counter)". Either wrap the root component in a <Provider>, or
+//   explicitly pass "store" as a prop to "Connect(Counter)".
+
+const output = shallow(<Root />)
+
+// FWIW, this also fails with the same error:
+
+// import { Provider } from 'react-redux'
+// import makeStore from '../../src/store'
+// const store = makeStore()
+// const output = shallow(
+//   <Provider store={store} >
+//     <Root />
+//   </Provider>
+// )
 
 exports['<Root />'] = {
-
-  before: () => {
-    output = shallow(<Root />, { context: { store } })
-  },
-
-  'is a <div>': () => expect(output).to.have.tagName('div'),
+  'is a <div>': () => expect(output.type()).to.equal('div'),
 }
